@@ -1,0 +1,45 @@
+
+.TeamPage{
+  height: 80vh;
+  width: 100%;
+  background-color: aquamarine;
+  overflow-y: scroll;
+  &__Post{
+    display: flex;
+    flex-direction: row;
+    min-height:10vh ;
+    width: 100%;
+    background-color: azure;
+    border-top: thin grey solid;
+    border-bottom: thin grey solid;
+
+    &__imageCont{
+      width: 20vw;
+      min-height: 100%;
+      &-img{
+        max-width:20vw ;
+      }
+    }
+
+
+    &__MessageCont{
+      display: flex;
+      flex-direction: column;
+      width: 80vw;
+      height: 100%;
+      &-name{
+        height: 10%;
+        width: 100%;
+        background-color: royalblue;
+
+      }
+      &-msg{
+        height: 90%;
+        width: 100%;
+        
+        
+        
+      }
+    }
+  }
+}

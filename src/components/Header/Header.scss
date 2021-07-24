@@ -1,0 +1,19 @@
+.Header{
+  height: 9.5vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 0.5vh solid #F0C265 ;
+  &__btn{
+    width: 44px;
+    height: 44px;
+    font-size: 2.5rem;
+    text-align: center;
+    background: none;
+    border: none;
+  }
+  &__logo{
+    height:60px ;
+  }
+}
