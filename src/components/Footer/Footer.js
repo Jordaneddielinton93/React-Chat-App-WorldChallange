@@ -20,9 +20,6 @@ let [messageSaved,setMessageSaved]= useState("")
   function getTeamChatMessageValue(e){
     setMessageSaved(e.target.value)
     console.log(messageSaved)
-   
-      
-    
   }
 
 
@@ -39,6 +36,7 @@ let [messageSaved,setMessageSaved]= useState("")
 
       (<>
       <input type="text"
+       className="Footer__inputbar"
        value={messageSaved} 
        onChange={getTeamChatMessageValue} 
        onKeyDown={HandleKeyDown} />

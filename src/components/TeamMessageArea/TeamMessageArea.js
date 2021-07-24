@@ -2,19 +2,19 @@ import "./TeamMessageArea.scss"
 
 const TeamMessageArea = ({state,dispatch}) => {
 
-  let toggleTrueFalse = false
+  let toggleTrueFalse = true
 
   function ToggleRemoveAddComment(){
     console.log(toggleTrueFalse)
 
-    toggleTrueFalse?toggleTrueFalse=false:toggleTrueFalse=true
+    toggleTrueFalse?toggleTrueFalse=true:toggleTrueFalse=false
     // dispatch({type:""})
   }
 
 
 
   return ( 
-    <main className="TeamPage">
+    <main className="TeamPage" id="anchor">
       {state.MessagesSent.map((item,index)=>{
         return(
           <div className="TeamPage__Post"

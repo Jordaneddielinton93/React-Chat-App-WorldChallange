@@ -2,6 +2,7 @@
 import "./App.scss"
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import SignIn from "../SignIn/SignIn";
 import TeamMessageArea from "../TeamMessageArea/TeamMessageArea"
 import { inistialState } from '../Libs/Reducer/reducer';
 import { Actions } from "../Libs/Actions/Actions";
@@ -20,13 +21,24 @@ function App() {
 
   return (
     <div className="App">
+
+      {
+      (state.PageOnDisplay==="TeamChatScreen")?
+      <>
       <Header state={state} dispatch={dispatch}/>
+
       <TeamMessageArea 
       state={state} 
       dispatch={dispatch}
       apiData={apiData}
       />
       <Footer state={state} dispatch={dispatch}/>
+      </>:
+      (state.PageOnDisplay === "SignIn")?
+      <>
+      <SignIn dispatch={dispatch}/>
+      </>:<></>
+      }
     </div>
   );
 }

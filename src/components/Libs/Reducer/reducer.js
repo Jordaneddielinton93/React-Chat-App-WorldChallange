@@ -2,6 +2,9 @@ import { Actions } from "../Actions/Actions";
 import logo from "../../images/messenger.svg"
 
 export let inistialState={
+  PageOnDisplay:"SignIn",
+  // "SignIn"
+  // "TeamChatScreen"
   HeaderBtnDisplay:"none",
   typingArea:"TeamChatArea",
   gitInfo:"",
@@ -15,6 +18,8 @@ export let inistialState={
 
 export default function reducer(state,action){
   switch (action.type) {
+    case Actions.PAGESHOWN:
+        return {...state,PageOnDisplay:action.payload}
     case Actions.HEADER :
       // when a person has been clicked show both header buttons and be able to remove said person
       return console.log("hello world")
