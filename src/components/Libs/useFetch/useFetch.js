@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react"
+import { useEffect,  useState } from "react"
 
-const useFetch = () => {
-  
-  let Options = {
-    Headers:"Accept: application/vnd.github.v3+json"
-  }
+
+const useFetch = (url) => {
+
 
   let [apiData,setApiData] = useState({})
 
   useEffect(()=>{
 
-    async function getApi(url){
-      const Response = await fetch("https://api.github.com/users/Jordaneddielinton93",Options)
+    async function getApi(){
+      console.log(url)
+      const Response = await fetch(url,{Headers:"Accept: application/vnd.github.v3+json"})
   
       const data = await Response.json()
-      setApiData(data)
-      console.log(data)
+      await setApiData(data)
+      console.log(data)  
     }
+
     getApi()
-  },[])
+  },[url])
   
   
 

@@ -1,39 +1,73 @@
 import "./SignIn.scss"
 import logo from "../images/messenger.svg"
+import useFetch from "../Libs/useFetch/useFetch"
 import { Actions } from "../Libs/Actions/Actions"
 import { useEffect, useState } from "react"
 
-const SignIn = ({dispatch}) => {
+const SignIn = ({state,dispatch}) => {
 
+
+
+  function changeScreen(){
+    dispatch({type:Actions.PAGESHOWN, payload:"TeamChatScreen"})
+  }
+
+  function checkUserNameCorrect(){
+
+    if(apiData.login){
+      dispatch({type:Actions.API_DATA,payload:apiData})
+      setToggleBorder("thick lime solid")
+
+      setTimeout(()=>{
+        changeScreen()
+      },1000)
+      
+
+    }else{
+      console.log("wrong")
+      setToggleBorder("thick red solid")
+
+    }
+
+  }
   // 1.    get users value for github search params
   // 1.5   check for valid email on Sign in click
-  // 2.    onClick SignIn change page to postArea 
+  // 2.    onClick SignIn change page to postArea
 
-  let [imgClass,setImgClass] = useState("SignInPage__Container__Logo")
+  let [toggleBorder,setToggleBorder] = useState("thick lime solid")
+  let [inputValue,setInputValue]= useState("")
+  let [userName,setUsername]= useState("")
+
+  // 
+  let [apiData] = useFetch(`https://api.github.com/users/${userName}`)
+
+  function handleClick(){
+  
+    setUsername(inputValue)
+
+  }
 
   useEffect(()=>{
-
-    
-    setTimeout(()=>{
-      console.log("hmm")
-      if(imgClass==="SignInPage__Container__Logo"){
-        setImgClass("SignInPage__Container__LogoSmall")
-        console.log("this should up")
-      }
-      if(imgClass==="SignInPage__Container__LogoSmall"){
-        setImgClass("SignInPage__Container__Logo")
-        console.log("this should down")
-      }
-
-    },3000)
-
-  },[imgClass])
+    checkUserNameCorrect()
+  },[apiData])
 
   function handleChange(e){
+    setInputValue(e.target.value)
     console.log(e.target.value)
   }
 
+  let [imgClass,setImgClass] = useState("SignInPage__Container__Logo")
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(imgClass==="SignInPage__Container__Logo"){
+        setImgClass("SignInPage__Container__LogoSmall")
+      }
+      if(imgClass==="SignInPage__Container__LogoSmall"){
+        setImgClass("SignInPage__Container__Logo")
+      }
+    },3000)
 
+  },[imgClass])
 
 
   return ( 
@@ -47,6 +81,7 @@ const SignIn = ({dispatch}) => {
 
 
       <input 
+        style={{border:toggleBorder}}
         className="SignInPage__Input"
         type="text" 
         placeholder="Git Hub Username"
@@ -55,7 +90,8 @@ const SignIn = ({dispatch}) => {
 
       <button 
         className="SignInPage__Submit"
-        onClick={()=>dispatch({type:Actions.PAGESHOWN, payload:"TeamChatScreen"})}
+        // onClick={()=>}
+        onClick={handleClick}
         > Sign In</button>
     </div>
    );

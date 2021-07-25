@@ -19,6 +19,7 @@ export let inistialState={
 export default function reducer(state,action){
   switch (action.type) {
     case Actions.PAGESHOWN:
+      
         return {...state,PageOnDisplay:action.payload}
     case Actions.HEADER :
       // when a person has been clicked show both header buttons and be able to remove said person
@@ -35,6 +36,7 @@ export default function reducer(state,action){
         MessagesSent:[...state.MessagesSent,{name:state.name,profileImg:state.avatar,message:action.payload}],
         }
     case Actions.API_DATA:
+      console.log(action.payload)
       return{
         ...state,
         name:action.payload.name,

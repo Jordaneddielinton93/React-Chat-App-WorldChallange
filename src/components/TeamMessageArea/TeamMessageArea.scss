@@ -42,7 +42,6 @@
       height: 100%;
       &-name{
         font-size: 1.2rem;
-        text-align: center;
         height: 10%;
         width: 100%;
         background-color: royalblue;
@@ -52,6 +51,7 @@
       &-msg{
         height: 90%;
         width: 90%;
+        overflow-wrap: break-word;
         
         
         
