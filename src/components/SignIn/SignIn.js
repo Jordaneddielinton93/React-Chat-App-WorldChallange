@@ -1,39 +1,63 @@
 import "./SignIn.scss"
 import logo from "../images/messenger.svg"
+import useFetch from "../Libs/useFetch/useFetch"
 import { Actions } from "../Libs/Actions/Actions"
 import { useEffect, useState } from "react"
 
-const SignIn = ({dispatch}) => {
+const SignIn = ({state,dispatch}) => {
+
 
   // 1.    get users value for github search params
   // 1.5   check for valid email on Sign in click
   // 2.    onClick SignIn change page to postArea 
+  
+  let [inputValue,setInputValue]= useState("")
+  let [userName,setUsername]= useState("")
 
-  let [imgClass,setImgClass] = useState("SignInPage__Container__Logo")
+
+  function changeDispatchStateToApi(){
+    dispatch({type:Actions.PAGESHOWN, payload:"TeamChatScreen"})
+  }
+
+  // 
+  let [apiData] = useFetch(`https://api.github.com/users/${userName}`)
 
   useEffect(()=>{
 
+    if(apiData.message !== "Not Found"){
+      changeDispatchStateToApi()
+        console.log(apiData)
+      }
     
-    setTimeout(()=>{
-      console.log("hmm")
-      if(imgClass==="SignInPage__Container__Logo"){
-        setImgClass("SignInPage__Container__LogoSmall")
-        console.log("this should up")
-      }
-      if(imgClass==="SignInPage__Container__LogoSmall"){
-        setImgClass("SignInPage__Container__Logo")
-        console.log("this should down")
-      }
+  },[apiData])
 
-    },3000)
+  function handleClick(){
+    console.log("hello")
 
-  },[imgClass])
+    setUsername(inputValue)
+  }
+
+  
 
   function handleChange(e){
+    setInputValue(e.target.value)
     console.log(e.target.value)
   }
 
 
+
+  let [imgClass,setImgClass] = useState("SignInPage__Container__Logo")
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(imgClass==="SignInPage__Container__Logo"){
+        setImgClass("SignInPage__Container__LogoSmall")
+      }
+      if(imgClass==="SignInPage__Container__LogoSmall"){
+        setImgClass("SignInPage__Container__Logo")
+      }
+    },3000)
+
+  },[imgClass])
 
 
   return ( 
@@ -55,7 +79,8 @@ const SignIn = ({dispatch}) => {
 
       <button 
         className="SignInPage__Submit"
-        onClick={()=>dispatch({type:Actions.PAGESHOWN, payload:"TeamChatScreen"})}
+        // onClick={()=>}
+        onClick={handleClick}
         > Sign In</button>
     </div>
    );
