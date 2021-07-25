@@ -23,14 +23,16 @@ function App() {
       <Header state={state} dispatch={dispatch}/>
 
       <TeamMessageArea 
-      state={state} 
-      dispatch={dispatch}
+        state={state} 
+        dispatch={dispatch}
       />
       <Footer state={state} dispatch={dispatch}/>
       </>:
       (state.PageOnDisplay === "SignIn")?
       <>
-      <SignIn state={state} dispatch={dispatch}/>
+      <SignIn 
+        state={state} 
+        dispatch={dispatch}/>
       </>:<></>
       }
     </div>

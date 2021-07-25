@@ -7,44 +7,54 @@ import { useEffect, useState } from "react"
 const SignIn = ({state,dispatch}) => {
 
 
-  // 1.    get users value for github search params
-  // 1.5   check for valid email on Sign in click
-  // 2.    onClick SignIn change page to postArea 
-  
-  let [inputValue,setInputValue]= useState("")
-  let [userName,setUsername]= useState("")
 
-
-  function changeDispatchStateToApi(){
+  function changeScreen(){
     dispatch({type:Actions.PAGESHOWN, payload:"TeamChatScreen"})
   }
+
+  function checkUserNameCorrect(){
+
+    if(apiData.login){
+      dispatch({type:Actions.API_DATA,payload:apiData})
+      setToggleBorder("thick lime solid")
+
+      setTimeout(()=>{
+        changeScreen()
+      },1000)
+      
+
+    }else{
+      console.log("wrong")
+      setToggleBorder("thick red solid")
+
+    }
+
+  }
+  // 1.    get users value for github search params
+  // 1.5   check for valid email on Sign in click
+  // 2.    onClick SignIn change page to postArea
+
+  let [toggleBorder,setToggleBorder] = useState("thick lime solid")
+  let [inputValue,setInputValue]= useState("")
+  let [userName,setUsername]= useState("")
 
   // 
   let [apiData] = useFetch(`https://api.github.com/users/${userName}`)
 
-  useEffect(()=>{
-
-    if(apiData.message !== "Not Found"){
-      changeDispatchStateToApi()
-        console.log(apiData)
-      }
-    
-  },[apiData])
-
   function handleClick(){
-    console.log("hello")
-
+  
     setUsername(inputValue)
+
   }
 
-  
+  useEffect(()=>{
+    checkUserNameCorrect()
+  },[apiData])
 
   function handleChange(e){
     setInputValue(e.target.value)
     console.log(e.target.value)
   }
-
-
 
   let [imgClass,setImgClass] = useState("SignInPage__Container__Logo")
   useEffect(()=>{
@@ -71,6 +81,7 @@ const SignIn = ({state,dispatch}) => {
 
 
       <input 
+        style={{border:toggleBorder}}
         className="SignInPage__Input"
         type="text" 
         placeholder="Git Hub Username"

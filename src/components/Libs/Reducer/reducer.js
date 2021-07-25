@@ -36,6 +36,7 @@ export default function reducer(state,action){
         MessagesSent:[...state.MessagesSent,{name:state.name,profileImg:state.avatar,message:action.payload}],
         }
     case Actions.API_DATA:
+      console.log(action.payload)
       return{
         ...state,
         name:action.payload.name,
