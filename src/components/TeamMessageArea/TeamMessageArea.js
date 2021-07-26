@@ -1,7 +1,5 @@
 import "./TeamMessageArea.scss"
 import dataBase from "../FireBase/FireBase"
-import ScrollIntoView from 'react-scroll-into-view'
-
 
 import { useEffect, useState } from "react"
 
@@ -77,7 +75,7 @@ let [objArray,setObjArray] = useState([])
           </div>
         )
       })}
-      <div onScroll></div>
+      
 
     </main>
    );

@@ -11,7 +11,8 @@
   &__Title{
     text-align: center;
     color: white;
-    text-shadow:0 0 20px  white;
+    text-shadow:0 0 20px  black;
+    font-size: 2.5rem;
   }
   &__Container{
     height: 30vh;
@@ -31,6 +32,8 @@
     border-radius: 10px;
     text-align: center;
     outline: none;
+    font-size: 1.5rem;
+    font-style: italic;
     
   }
 
@@ -48,4 +51,8 @@
     }
   }
 
+}
+
+@media only screen and (max-width: 600px) {
+  
 }

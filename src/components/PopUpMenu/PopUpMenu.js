@@ -12,26 +12,45 @@ const PopUpMenu = ({state,dispatch}) => {
     dispatch({type:Actions.FOOTER,payload:"Close"})
   }
 
-  
+  console.log(state)
   return ( 
     <div className={state.PopUpMenu}>
      <main 
      className="PopupMenu__main"
      style={state.PopUpMenu==="PopupMenuClosed"?{display:"none"}:{display:"flex"}}>
 
+       <section className="PopupMenu__main__TopSection">
+        <img 
+        className="PopupMenu__main__TopSection__avatar"
+        src={state.avatar+".png"} 
+        alt="" />
+        <h1>{state.name}</h1>
 
-      <Button 
+
+       </section>
+
+
+
+       <section className="PopupMenu__main__MidSection">
+
+       <h2 className="PopupMenu__main__MidSection__bio">{state.bio}</h2>
+
+       </section>
+
+       <section className="PopupMenu__main__BottmSection">
+
+       <Button 
+        className="PopupMenu__main__Cont"
         text="Close Popup"
         handleClick={ClosePopUpMenu}
        />
-
-{/* need to be merged not saving not sure why */}
-
        <Button
         text="Logout"
         handleClick={GoToSignInPage}
        />
 
+
+       </section>
 
      </main>
       

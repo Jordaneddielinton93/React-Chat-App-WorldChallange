@@ -8,6 +8,7 @@ import { inistialState } from '../Libs/Reducer/reducer';
 import reducer from "../Libs/Reducer/reducer"
 import { useReducer } from 'react';
 import PopUpMenu from "../PopUpMenu/PopUpMenu";
+import NewsFeed from "../NewsFeed/NewsFeed";
 
 function App() {
   
@@ -37,6 +38,10 @@ function App() {
       </>:
       (state.PageOnDisplay === "NewsFeed")?
       <>
+      <Header state={state} dispatch={dispatch}/>
+      <NewsFeed/>
+      <Footer state={state} dispatch={dispatch}/>
+
       </>:<></>
       }
       <PopUpMenu

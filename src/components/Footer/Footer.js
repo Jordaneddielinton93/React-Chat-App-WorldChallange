@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import { TiMessages } from "react-icons/ti";
+import { TiMessages,TiNews } from "react-icons/ti";
+import { AiOutlineSend } from "react-icons/ai";
 import { Actions } from "../Libs/Actions/Actions";
 import database from "../FireBase/FireBase"
 
@@ -10,8 +11,8 @@ const Footer = ({state,dispatch}) => {
 let [messageSaved,setMessageSaved]= useState("")
 
   function HandleKeyDown(e){
-    console.log(messageSaved)
-    if(e.key === "Enter" && messageSaved.length >=1){
+    console.log("this is sparta")
+    if((e.key === "Enter" && messageSaved.length >=1) || (e ==="clicked" && messageSaved.length >=1 ) ){
 
       database.child("profile").push({
         name:state.name,
@@ -36,13 +37,16 @@ let [messageSaved,setMessageSaved]= useState("")
 
 
   return ( 
+    
     <footer className="Footer">
+
+      
       <button className="Footer__btn" data-testid="leftbutton" style={{display:state.FooterBtnDisplay}} onClick={()=>dispatch({type:Actions.FOOTER,payload:"leftBtn"})} > <CgProfile/>  </button>
 
 
 
       {
-      state.typingArea === "TeamChatArea"?
+      state.PageOnDisplay === "TeamChatScreen"?
 
       (<>
       <input type="text"
@@ -50,17 +54,42 @@ let [messageSaved,setMessageSaved]= useState("")
        value={messageSaved} 
        onChange={getTeamChatMessageValue} 
        onKeyDown={HandleKeyDown} />
-      <button >S</button>
+
+      <button 
+        onClick={()=>HandleKeyDown("clicked")}
+        className="Footer__sendMsg"
+       ><AiOutlineSend/></button>
+
+      <button 
+        className="Footer__btn" 
+        data-testid="rightbutton" 
+        style={{display:state.FooterBtnDisplay}} 
+        onClick={()=>dispatch({type:Actions.FOOTER,payload:"NewsBtn"})}> 
+        <TiNews/>
+      </button>
       </>):
 
 
-      (state.typingArea === "PostingArea")?
-      (<input type="text" onChange={getTeamChatMessageValue} />):
+      (state.PageOnDisplay === "NewsFeed")?
+      (
+      <>
+      <input
+      className="Footer__inputbar"
+       type="text" 
+       onChange={getTeamChatMessageValue} />
+
+      <button 
+      className="Footer__btn"
+      onClick={()=>dispatch({type:Actions.FOOTER,payload:"TeamChatScreen"})}>
+        <TiMessages/>
+      </button>
+      </>
+      ):
       <></>
       }
 
       
-      <button className="Footer__btn" data-testid="rightbutton" style={{display:state.FooterBtnDisplay}} onClick={()=>dispatch({type:Actions.FOOTER,payload:"right"})}> <TiMessages/> </button>
+      
     </footer>
    );
 }

@@ -1,3 +1,4 @@
+import PopUpMenu from "../../PopUpMenu/PopUpMenu";
 import { Actions } from "../Actions/Actions";
 
 export let inistialState={
@@ -7,11 +8,12 @@ export let inistialState={
   // "NewsFeed"
   PopUpMenu:"PopupMenuClosed",
   // "PopupMenu"
-  HeaderBtnDisplay:"inline-block",
+  HeaderBtnDisplay:"none",
   typingArea:"TeamChatArea",
   gitInfo:"",
   name:"",
   avatar:"",
+  bio:"",
   MessagesSent:[]
 
 }
@@ -28,10 +30,28 @@ export default function reducer(state,action){
       return console.log("hello world")
 
     case Actions.FOOTER:
+      console.log("hum bug")
       if(action.payload==="leftBtn"){
         return {...state,PopUpMenu:"PopupMenu"}
+      }else if(action.payload==="NewsBtn"){
+        return{
+          ...state,
+          PopUpMenu:"PopupMenuClosed",
+          PageOnDisplay:"NewsFeed"
+        }
+      }else if(action.payload==="TeamChatScreen"){
+          return{
+            ...state,
+            PopUpMenu:"PopupMenuClosed",
+            PageOnDisplay:"TeamChatScreen"
+
+          }
       }else{
-        return {...state,PopUpMenu:"PopupMenuClosed"}
+        return {
+          ...state,
+          PopUpMenu:"PopupMenuClosed",
+          
+        }
       }
     case Actions.TYPING_AREA:
       if(Actions.payload === "TeamArea"){
@@ -53,7 +73,8 @@ export default function reducer(state,action){
       return{
         ...state,
         name:action.payload.name,
-        avatar:action.payload.avatar_url
+        avatar:action.payload.avatar_url,
+        bio:action.payload.bio
       }
     default:
       break;
