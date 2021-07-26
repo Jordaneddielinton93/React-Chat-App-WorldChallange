@@ -3,6 +3,7 @@ import logo from "../images/messenger.svg"
 import useFetch from "../Libs/useFetch/useFetch"
 import { Actions } from "../Libs/Actions/Actions"
 import { useEffect, useState } from "react"
+import Button from "../App/Button/Button"
 
 const SignIn = ({state,dispatch}) => {
 
@@ -42,7 +43,7 @@ const SignIn = ({state,dispatch}) => {
   let [apiData] = useFetch(`https://api.github.com/users/${userName}`)
 
   function handleClick(){
-  
+    console.log("hi")
     setUsername(inputValue)
 
   }
@@ -88,11 +89,14 @@ const SignIn = ({state,dispatch}) => {
         onChange={handleChange}
        />
 
-      <button 
-        className="SignInPage__Submit"
+      <Button text="Sign In"
+       handleClick={handleClick}
+       
+        />
+      {/* <button
         // onClick={()=>}
-        onClick={handleClick}
-        > Sign In</button>
+        
+        > Sign In</button> */}
     </div>
    );
 }

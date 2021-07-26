@@ -7,6 +7,7 @@ import TeamMessageArea from "../TeamMessageArea/TeamMessageArea"
 import { inistialState } from '../Libs/Reducer/reducer';
 import reducer from "../Libs/Reducer/reducer"
 import { useReducer } from 'react';
+import PopUpMenu from "../PopUpMenu/PopUpMenu";
 
 function App() {
   
@@ -33,8 +34,14 @@ function App() {
       <SignIn 
         state={state} 
         dispatch={dispatch}/>
+      </>:
+      (state.PageOnDisplay === "NewsFeed")?
+      <>
       </>:<></>
       }
+      <PopUpMenu
+        state={state} 
+        dispatch={dispatch}/>
     </div>
   );
 }

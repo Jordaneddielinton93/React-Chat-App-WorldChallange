@@ -1,5 +1,6 @@
 export let Actions = {
   HEADER:"Header",
+  FOOTER:"FOOTER",
   TYPING_AREA:"TypingArea",
   USER_MESSAGE:"USER_MESSAGE",
   API_DATA:"API_DATA",
