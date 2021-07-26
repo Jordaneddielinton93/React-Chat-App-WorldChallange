@@ -25,7 +25,7 @@ const PopUpMenu = ({state,dispatch}) => {
         handleClick={ClosePopUpMenu}
        />
 
-
+{/* need to be merged not saving not sure why */}
 
        <Button
         text="Logout"
