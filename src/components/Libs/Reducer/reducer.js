@@ -7,7 +7,7 @@ export let inistialState={
   // "NewsFeed"
   PopUpMenu:"PopupMenuClosed",
   // "PopupMenu"
-  HeaderBtnDisplay:"none",
+  HeaderBtnDisplay:"inline-block",
   typingArea:"TeamChatArea",
   gitInfo:"",
   name:"",
@@ -33,8 +33,6 @@ export default function reducer(state,action){
       }else{
         return {...state,PopUpMenu:"PopupMenuClosed"}
       }
-      
-      break
     case Actions.TYPING_AREA:
       if(Actions.payload === "TeamArea"){
       return {...state,typingArea:"TeamChatArea"}

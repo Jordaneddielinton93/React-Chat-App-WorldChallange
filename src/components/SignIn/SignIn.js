@@ -3,7 +3,7 @@ import logo from "../images/messenger.svg"
 import useFetch from "../Libs/useFetch/useFetch"
 import { Actions } from "../Libs/Actions/Actions"
 import { useEffect, useState } from "react"
-import Button from "../App/Button/Button"
+import Button from "../Button/Button"
 
 const SignIn = ({state,dispatch}) => {
 
