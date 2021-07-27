@@ -14,6 +14,8 @@
     background-color: white;
     border-top: thin grey solid;
     border-bottom: thin grey solid;
+    border-radius: 10px;
+
     margin:2px 0px ;
 
     &__imageCont{
@@ -38,12 +40,11 @@
         font-size: 1.2rem;
         height: 10%;
         width: 100%;
-        background-color: royalblue;
-        color: white;
+        color: #6FC0F8;
 
       }
       &-msg{
-        height: 90%;
+        min-height: 90%;
         width: 90%;
         overflow-wrap: break-word;
         

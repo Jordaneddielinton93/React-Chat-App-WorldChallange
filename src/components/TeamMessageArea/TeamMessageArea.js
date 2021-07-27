@@ -10,9 +10,10 @@ const TeamMessageArea = ({state,dispatch}) => {
    let [fireDbTeamChat,]= Firebase
    let [objArray,setObjArray] = useState([])
 
-  useEffect(()=>{
-    
 
+
+
+  useEffect(()=>{
     fireDbTeamChat.on("value",(snapshot)=>{
       let profile = snapshot.val()
       console.log(profile)
@@ -20,7 +21,6 @@ const TeamMessageArea = ({state,dispatch}) => {
       for( let id in profile.TeamChat){
         let newObj=profile.TeamChat[id]
           fullListOfProfiles.push(newObj)
-
       }
       setObjArray(fullListOfProfiles)
 

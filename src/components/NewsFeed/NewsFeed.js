@@ -1,31 +1,42 @@
 import "./NewsFeed.scss"
 import Firebase from "../FireBase/FireBase"
-import website from "../images/website.gif"
+import website from "../images/trybuild.png"
 import { useEffect, useState } from "react"
+import { TiThumbsOk } from 'react-icons/ti';
+
 
 
 const NewsFeed = () => {
   let [fireDbTeamChat,]= Firebase
 
  
+
+
+function AddALike(thisid,thisname,thismessage,img,likes){
+  // fireDbTeamChat.child("NewsFeed").push({
+  //   ...profile.
+  // })
+  fireDbTeamChat.child("NewsFeed").child(thisid).set({
+    likes:likes+1,
+    name:thisname,
+    message:thismessage,
+    profileImg:img
+  })
+}
+
+  
   let [objArray,setObjArray] = useState([])
-
  useEffect(()=>{
-   
-
+  // Loops through the whole NewsFeed and pushs the result to an array also adding the unquie id given from the server so you can update it later
   fireDbTeamChat.on("value",(snapshot)=>{
     let profile = snapshot.val()
-      console.log(profile)
       let fullListOfProfiles=[]
       for( let id in profile.NewsFeed){
         let newObj=profile.NewsFeed[id]
-          fullListOfProfiles.push(newObj)
-
+          fullListOfProfiles.push({...newObj,iD:id})
       }
       setObjArray(fullListOfProfiles)
-
    })
-
  },[fireDbTeamChat])
 
   
@@ -34,13 +45,12 @@ const NewsFeed = () => {
 
 
   
-
+// opens the challange menu
   let [challengeOpen,setChallenge]=useState(false)
   function changeChallengTrueFalse(){
     challengeOpen?setChallenge(false):setChallenge(true)
   }
   
-
   return ( 
     <div className="NewsFeed">
       <main 
@@ -81,7 +91,21 @@ const NewsFeed = () => {
             <section className="TeamPage__Post__MessageCont">
               <h1 className="TeamPage__Post__MessageCont-name">{item.name}</h1>
               <h5 className="TeamPage__Post__MessageCont-msg">{item.message}</h5>
+              <div className="TeamPage__Post__ResponseCont">
+                <div className="TeamPage__Post__ResponseCont__shown">
+                  <h5>{item.likes} like</h5>
+                </div>
+                <div className="TeamPage__Post__ResponseCont__likes">
+                  <button 
+                  className="TeamPage__Post__ResponseCont__likes-btn"
+                  onClick={()=>AddALike(item.iD,item.name,item.message,item.profileImg,item.likes)}
+                  >
+                    <TiThumbsOk/>like
+                  </button>
+                </div>
+                </div>
             </section>
+            
 
 
           </div>

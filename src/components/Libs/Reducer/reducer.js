@@ -30,7 +30,6 @@ export default function reducer(state,action){
       return console.log("hello world")
 
     case Actions.FOOTER:
-      console.log("hum bug")
       if(action.payload==="leftBtn"){
         return {...state,PopUpMenu:"PopupMenu"}
       }else if(action.payload==="NewsBtn"){

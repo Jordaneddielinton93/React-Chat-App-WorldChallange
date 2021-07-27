@@ -21,7 +21,8 @@ let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
     fireDbTeamChat.child("NewsFeed").push({
         name:state.name,
         message:messageSavedNewsFeed,
-        profileImg:state.avatar
+        profileImg:state.avatar,
+        likes:0
       })
 
      
