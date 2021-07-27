@@ -12,5 +12,12 @@ import firebase from "firebase";
     measurementId: "G-8HGS6NB879"
   };
   // Initialize Firebase
- const fireDb = firebase.initializeApp(firebaseConfig);
- export default fireDb.database().ref()
+ const fireDatabase = firebase.initializeApp(firebaseConfig);
+
+ const fireDbTeamChat = fireDatabase.database().ref("profile")
+
+ const fireStorage = fireDatabase.storage()
+
+ const Firebase = [fireDbTeamChat,fireStorage]
+
+ export default Firebase

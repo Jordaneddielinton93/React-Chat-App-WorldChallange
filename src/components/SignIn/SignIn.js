@@ -54,7 +54,7 @@ const SignIn = ({state,dispatch}) => {
 
   function handleChange(e){
     setInputValue(e.target.value)
-    console.log(e.target.value)
+    
   }
 
   let [imgClass,setImgClass] = useState("SignInPage__Container__Logo")

@@ -12,7 +12,7 @@ const PopUpMenu = ({state,dispatch}) => {
     dispatch({type:Actions.FOOTER,payload:"Close"})
   }
 
-  console.log(state)
+
   return ( 
     <div className={state.PopUpMenu}>
      <main 

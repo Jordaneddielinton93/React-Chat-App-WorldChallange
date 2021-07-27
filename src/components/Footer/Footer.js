@@ -3,18 +3,45 @@ import { CgProfile } from "react-icons/cg";
 import { TiMessages,TiNews } from "react-icons/ti";
 import { AiOutlineSend } from "react-icons/ai";
 import { Actions } from "../Libs/Actions/Actions";
-import database from "../FireBase/FireBase"
+import Firebase from "../FireBase/FireBase"
 
 import "./Footer.scss"
 const Footer = ({state,dispatch}) => {
+  let [fireDbTeamChat,fireDbNewsFeed]= Firebase
 
 let [messageSaved,setMessageSaved]= useState("")
+let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
 
-  function HandleKeyDown(e){
-    console.log("this is sparta")
+
+
+  function HandleKeyDownNewsFeedArea(e){
+    if((e.key === "Enter" && messageSavedNewsFeed.length >=1) || (e ==="clicked" && messageSavedNewsFeed.length >=1 ) ){
+    console.log("has been sent",e)
+
+    fireDbTeamChat.child("NewsFeed").push({
+        name:state.name,
+        message:messageSavedNewsFeed,
+        profileImg:state.avatar
+      })
+
+     
+
+      setMessageSavedNewsFeed("")
+    }
+
+  }
+function getNewsFeedMessageValue(e){
+  setMessageSavedNewsFeed(e.target.value)
+    console.log(messageSavedNewsFeed)
+}
+
+
+
+  function HandleKeyDownTeamChatArea(e){
+    
     if((e.key === "Enter" && messageSaved.length >=1) || (e ==="clicked" && messageSaved.length >=1 ) ){
 
-      database.child("profile").push({
+      fireDbTeamChat.child("TeamChat").push({
         name:state.name,
         message:messageSaved,
         profileImg:state.avatar
@@ -30,7 +57,7 @@ let [messageSaved,setMessageSaved]= useState("")
 
   function getTeamChatMessageValue(e){
     setMessageSaved(e.target.value)
-    console.log(messageSaved)
+    
   }
 
 
@@ -53,10 +80,10 @@ let [messageSaved,setMessageSaved]= useState("")
        className="Footer__inputbar"
        value={messageSaved} 
        onChange={getTeamChatMessageValue} 
-       onKeyDown={HandleKeyDown} />
+       onKeyDown={HandleKeyDownTeamChatArea} />
 
       <button 
-        onClick={()=>HandleKeyDown("clicked")}
+        onClick={()=>HandleKeyDownTeamChatArea("clicked")}
         className="Footer__sendMsg"
        ><AiOutlineSend/></button>
 
@@ -75,8 +102,15 @@ let [messageSaved,setMessageSaved]= useState("")
       <>
       <input
       className="Footer__inputbar"
+      value={messageSavedNewsFeed}
        type="text" 
-       onChange={getTeamChatMessageValue} />
+       onChange={getNewsFeedMessageValue}
+       onKeyDown={HandleKeyDownNewsFeedArea} />
+
+      <button 
+        onClick={()=>HandleKeyDownNewsFeedArea("clicked")}
+        className="Footer__sendMsg"
+       ><AiOutlineSend/></button>
 
       <button 
       className="Footer__btn"

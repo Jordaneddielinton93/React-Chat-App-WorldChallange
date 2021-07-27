@@ -1,5 +1,5 @@
 import "./TeamMessageArea.scss"
-import dataBase from "../FireBase/FireBase"
+import Firebase from "../FireBase/FireBase"
 
 import { useEffect, useState } from "react"
 
@@ -7,29 +7,26 @@ const TeamMessageArea = ({state,dispatch}) => {
 
 
    //  here im getting the profiles from an object with keys then adding to a list
-
-let [objArray,setObjArray] = useState([])
+   let [fireDbTeamChat,]= Firebase
+   let [objArray,setObjArray] = useState([])
 
   useEffect(()=>{
     
 
-    dataBase.on("value",(snapshot)=>{
-      let profiles = snapshot.val()
+    fireDbTeamChat.on("value",(snapshot)=>{
+      let profile = snapshot.val()
+      console.log(profile)
       let fullListOfProfiles=[]
-      for( let id in profiles){
-        let newObj=profiles[id]
-        for(let id2 in newObj){
-          let newObj2=newObj[id2]
-          console.log(newObj2)
-          fullListOfProfiles.push(newObj2)
-        }
-  
+      for( let id in profile.TeamChat){
+        let newObj=profile.TeamChat[id]
+          fullListOfProfiles.push(newObj)
+
       }
       setObjArray(fullListOfProfiles)
 
     })
 
-  },[dataBase])
+  },[fireDbTeamChat])
 
    
   console.log(objArray)
