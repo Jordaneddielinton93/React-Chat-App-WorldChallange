@@ -16,7 +16,6 @@ const TeamMessageArea = ({state,dispatch}) => {
   useEffect(()=>{
     fireDbTeamChat.on("value",(snapshot)=>{
       let profile = snapshot.val()
-      console.log(profile)
       let fullListOfProfiles=[]
       for( let id in profile.TeamChat){
         let newObj=profile.TeamChat[id]
@@ -59,6 +58,7 @@ const TeamMessageArea = ({state,dispatch}) => {
           <div className="TeamPage__Post"
            key={index}
            onClick={ToggleRemoveAddComment}
+           style={state.name===item.name?{alignSelf:"flex-start"}:{alignSelf:"flex-end"}}
            >
             <section className="TeamPage__Post__imageCont">
               <img className="TeamPage__Post__imageCont-img" src={item.profileImg+".png"} alt=""/>

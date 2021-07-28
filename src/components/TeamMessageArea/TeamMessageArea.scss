@@ -1,22 +1,25 @@
 
 .TeamPage{
+  display: flex;
   height: 80vh;
   width: 100%;
+  flex-direction: column;
   background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
   transition: 2s;
   overflow-y: scroll;
-  &__Post{
+  align-items:center ;
 
+  &__Post{
     display: flex;
     flex-direction: row;
     min-height:10vh ;
-    max-width: 100%;
+    max-width: 90%;
     background-color: white;
-    border-top: thin grey solid;
-    border-bottom: thin grey solid;
+    border: thin grey solid;
+    
     border-radius: 10px;
-
-    margin:2px 0px ;
+    box-shadow: #6fa4f9 2px 2px 2px;
+    margin:4px 0px ;
 
     &__imageCont{
       width: 20vw;
@@ -38,13 +41,13 @@
       height: 100%;
       &-name{
         font-size: 1.2rem;
-        height: 10%;
+        height: 40%;
         width: 100%;
         color: #6FC0F8;
 
       }
       &-msg{
-        min-height: 90%;
+        min-height: 60%;
         width: 90%;
         overflow-wrap: break-word;
         

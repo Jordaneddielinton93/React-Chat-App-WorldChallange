@@ -10,7 +10,7 @@ const SignIn = ({state,dispatch}) => {
 
 
   function changeScreen(){
-    dispatch({type:Actions.PAGESHOWN, payload:"TeamChatScreen"})
+    dispatch({type:Actions.PAGESHOWN, payload:"NewsFeed"})
   }
 
   function checkUserNameCorrect(){

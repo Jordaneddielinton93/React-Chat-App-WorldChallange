@@ -82,22 +82,22 @@ function AddALike(thisid,thisname,thismessage,img,likes){
        
 
 
-          <div className="TeamPage__Post"
+          <div className="NewsFeed__Post"
            key={index}
            >
-            <section className="TeamPage__Post__imageCont">
-              <img className="TeamPage__Post__imageCont-img" src={item.profileImg+".png"} alt=""/>
+            <section className="NewsFeed__Post__imageCont">
+              <img className="NewsFeed__Post__imageCont-img" src={item.profileImg+".png"} alt=""/>
             </section>
-            <section className="TeamPage__Post__MessageCont">
-              <h1 className="TeamPage__Post__MessageCont-name">{item.name}</h1>
-              <h5 className="TeamPage__Post__MessageCont-msg">{item.message}</h5>
-              <div className="TeamPage__Post__ResponseCont">
-                <div className="TeamPage__Post__ResponseCont__shown">
+            <section className="NewsFeed__Post__MessageCont">
+              <h1 className="NewsFeed__Post__MessageCont-name">{item.name}</h1>
+              <h5 className="NewsFeed__Post__MessageCont-msg">{item.message}</h5>
+              <div className="NewsFeed__Post__ResponseCont">
+                <div className="NewsFeed__Post__ResponseCont__shown">
                   <h5>{item.likes} like</h5>
                 </div>
-                <div className="TeamPage__Post__ResponseCont__likes">
+                <div className="NewsFeed__Post__ResponseCont__likes">
                   <button 
-                  className="TeamPage__Post__ResponseCont__likes-btn"
+                  className="NewsFeed__Post__ResponseCont__likes-btn"
                   onClick={()=>AddALike(item.iD,item.name,item.message,item.profileImg,item.likes)}
                   >
                     <TiThumbsOk/>like
