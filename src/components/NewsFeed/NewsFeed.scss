@@ -9,11 +9,11 @@
     height: 80vh;
     background-color: whitesmoke;
     text-align: center;
-    border-bottom: outset thick red;
+    border-bottom: outset thick lightblue;
     cursor: pointer;
     transition:height 0.5s;
     &:hover{
-      border-bottom: inset thick red;
+      border-bottom: inset thick lightblue;
     }
 
     &__tile{
@@ -40,22 +40,22 @@
   }
   &__Post{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     min-height:10vh ;
     max-width: 98%;
+    align-items: center;
     background-color: white;
     border: thin grey solid;
     box-shadow: #6fa4f9 2px 2px 2px;
     padding:4px 0px ;
     border-radius: 10px;
-
-
     margin:2px 0px ;
 
     &__imageCont{
       width: 20vw;
       min-height: 100%;
       &-img{
+        object-fit: contain;
         max-width:20vw ;
         max-height: 100px;
         border-radius: 100px;
@@ -67,10 +67,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      
-      width: 80vw;
+      width: 100%;
       height: 100%;
       &-name{
+        text-align: center;
         font-size: 1.2rem;
         height: 40%;
         width: 100%;
@@ -81,31 +81,43 @@
         min-height: 60%;
         width: 90%;
         overflow-wrap: break-word;
-        
+        &-img{
+          display: flex;
+          width: 100%;
+          justify-content: flex-start;
+          &-left{
+            max-height:400px;
+            max-width:90vw;
+            border: solid thin white;
+            border-radius: 20px;
+          }
+          
+        }
         
         
       }
     }
-  }
-}
-
-.NewsFeed__Post__ResponseCont{
-  width: 100%;
-  padding: 5px;
-  &__shown{
-    height:20px ;
-    width: 100%;
-    color: blue;
-  }
-  &__likes{
-    height:30px ;
-    width: 100%;
-    &-btn{
-
+    &__ResponseCont{
+      width: 90%;
+      padding: 5px;
+      &__shown{
+        height:20px ;
+        width: 100%;
+        color: blue;
+      }
+      &__likes{
+        height:30px ;
+        width: 100%;
+        &-btn{
+    
+        }
+      }
+      
     }
   }
-  
 }
+
+
 
 
 .NewsFeed__ChallengeClose{
@@ -113,10 +125,14 @@
     height: 5vh;
     background-color: whitesmoke;
     text-align: center;
-    border-bottom: outset thick red;
+    border-bottom: solid thick rgba(235, 129, 129, 0.76);
     cursor: pointer;
     font-size: 0.7rem;
     transition: height 1s;
+    & h1{
+      height: 90%;
+      border-bottom: solid thick #74C8F8;
+    }
 
     &:hover{
       border-bottom: inset thick red;
@@ -129,13 +145,14 @@
     width:960px ;
     margin-left: auto;
     margin-right: auto;
-
   }
   .NewsFeed__ChallengeClose{
-    width:960px ;
+    max-width:960px ;
     margin-left: auto;
     margin-right: auto;
     transition: 2s;
-
+    & h1{
+      width: 100%;
+    }
   }
 }

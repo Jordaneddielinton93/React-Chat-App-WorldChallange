@@ -15,7 +15,9 @@ const Header = ({state,dispatch}) => {
 
 {/* change above to delete commments by doing an if statement return each the type of button shown when click on a message */}
 
-      <img src={logo} alt="logo" className="Header__logo"/>
+      <img 
+      onClick={()=>dispatch({type:Actions.FOOTER,payload:"leftBtn"})}
+      src={state.avatar} alt="logo" className="Header__logo"/>
 
 
 

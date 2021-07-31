@@ -39,7 +39,7 @@ function App() {
       (state.PageOnDisplay === "NewsFeed")?
       <>
       <Header state={state} dispatch={dispatch}/>
-      <NewsFeed/>
+      <NewsFeed state={state} dispatch={dispatch}/>
       <Footer state={state} dispatch={dispatch}/>
 
       </>:<></>

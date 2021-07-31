@@ -14,6 +14,7 @@ export let inistialState={
   name:"",
   avatar:"",
   bio:"",
+  imgURL:"",
   MessagesSent:[]
 
 }
@@ -23,6 +24,8 @@ export default function reducer(state,action){
     
     case Actions.PAGESHOWN:
         return {...state,PageOnDisplay:action.payload}
+
+    
 
 
     case Actions.HEADER :
@@ -74,6 +77,10 @@ export default function reducer(state,action){
         name:action.payload.name,
         avatar:action.payload.avatar_url,
         bio:action.payload.bio
+      }
+    case "imgUrl":
+      return{...state,
+        imgURL:action.payload
       }
     default:
       break;

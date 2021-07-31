@@ -1,21 +1,22 @@
 import "./NewsFeed.scss"
 import Firebase from "../FireBase/FireBase"
-import website from "../images/trybuild.png"
+import website from "../images/challangeImg.jpg"
+import img1 from "../images/sampleIMG1.jpg"
 import { useEffect, useState } from "react"
 import { TiThumbsOk } from 'react-icons/ti';
 
 
 
-const NewsFeed = () => {
+
+
+const NewsFeed = ({state}) => {
   let [fireDbTeamChat,]= Firebase
 
  
 
 
 function AddALike(thisid,thisname,thismessage,img,likes){
-  // fireDbTeamChat.child("NewsFeed").push({
-  //   ...profile.
-  // })
+// this is just a function that updates the database with one like
   fireDbTeamChat.child("NewsFeed").child(thisid).set({
     likes:likes+1,
     name:thisname,
@@ -28,6 +29,7 @@ function AddALike(thisid,thisname,thismessage,img,likes){
   let [objArray,setObjArray] = useState([])
  useEffect(()=>{
   // Loops through the whole NewsFeed and pushs the result to an array also adding the unquie id given from the server so you can update it later
+   
   fireDbTeamChat.on("value",(snapshot)=>{
     let profile = snapshot.val()
       let fullListOfProfiles=[]
@@ -78,23 +80,49 @@ function AddALike(thisid,thisname,thismessage,img,likes){
       </main>
 
       {objArray.map((item,index)=>{
+
+
+
         return(
        
 
 
           <div className="NewsFeed__Post"
+          
            key={index}
            >
             <section className="NewsFeed__Post__imageCont">
               <img className="NewsFeed__Post__imageCont-img" src={item.profileImg+".png"} alt=""/>
             </section>
+
             <section className="NewsFeed__Post__MessageCont">
               <h1 className="NewsFeed__Post__MessageCont-name">{item.name}</h1>
-              <h5 className="NewsFeed__Post__MessageCont-msg">{item.message}</h5>
+
+              <section className="NewsFeed__Post__MessageCont-msg">
+                {item.message}
+
+                <div className="NewsFeed__Post__MessageCont-msg-img">
+
+                  <img 
+                  onClick={()=>console.log("im image1")}
+                  className="NewsFeed__Post__MessageCont-msg-img-left" 
+                  src={"state.imgURL"}   alt="" />
+
+
+
+
+                  <img className="NewsFeed__Post__MessageCont-msg-img-left"
+                  src={`https://firebasestorage.googleapis.com/v0/b/chatappchallange.appspot.com/o/NewsFeed%2F${item.imagesent}?alt=media&token=389fed54-3698-4bad-aadf-8a1d1616dda2`}  alt="" />
+
+                </div>
+              </section>
+
               <div className="NewsFeed__Post__ResponseCont">
+
                 <div className="NewsFeed__Post__ResponseCont__shown">
                   <h5>{item.likes} like</h5>
                 </div>
+
                 <div className="NewsFeed__Post__ResponseCont__likes">
                   <button 
                   className="NewsFeed__Post__ResponseCont__likes-btn"
@@ -103,7 +131,7 @@ function AddALike(thisid,thisname,thismessage,img,likes){
                     <TiThumbsOk/>like
                   </button>
                 </div>
-                </div>
+              </div>
             </section>
             
 

@@ -1,20 +1,47 @@
 import { useState } from "react";
-import { CgProfile } from "react-icons/cg";
 import { TiMessages,TiNews } from "react-icons/ti";
+import {FcImageFile} from "react-icons/fc"
 import { AiOutlineSend } from "react-icons/ai";
 import { Actions } from "../Libs/Actions/Actions";
 import Firebase from "../FireBase/FireBase"
 
 import "./Footer.scss"
 const Footer = ({state,dispatch}) => {
-  let [fireDbTeamChat,fireDbNewsFeed]= Firebase
+  let [fireDbTeamChat,fireStorage]= Firebase
 
 let [messageSaved,setMessageSaved]= useState("")
 let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
 
 
 
-  function HandleKeyDownNewsFeedArea(e){
+
+  
+
+
+
+  function  HandleKeyDownNewsFeedArea(e){
+
+  
+
+    if((e.key === "Enter" && messageSavedNewsFeed.length >=1 && fireImage !== null) || (e ==="clicked" && messageSavedNewsFeed.length >=1 && fireImage !== null ) ){
+
+      const uploadTask = fireStorage.ref(`NewsFeed/${fireImage.name}`).put(fireImage);
+      uploadTask.on(
+        "state_changed",
+        snapshot =>{},
+        error =>{
+          console.log(error)
+        },
+        ()=>{
+          fireStorage
+          .ref("NewsFeed").child(fireImage.name).getDownloadURL()
+          .then(url => dispatch({type:"imgUrl",payload:`${url}`}))
+        }
+      )
+    }
+
+
+
     if((e.key === "Enter" && messageSavedNewsFeed.length >=1) || (e ==="clicked" && messageSavedNewsFeed.length >=1 ) ){
     console.log("has been sent",e)
 
@@ -22,13 +49,19 @@ let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
         name:state.name,
         message:messageSavedNewsFeed,
         profileImg:state.avatar,
-        likes:0
+        likes:0,
+        imagesent:fireImage.name
       })
-
-     
-
       setMessageSavedNewsFeed("")
+      setFireImage("")
     }
+    // above will send a new message to the database below will send an image
+    // fireStorage
+    
+
+
+
+
 
   }
 function getNewsFeedMessageValue(e){
@@ -47,9 +80,6 @@ function getNewsFeedMessageValue(e){
         message:messageSaved,
         profileImg:state.avatar
       })
-
-     
-
       setMessageSaved("")
     }
 
@@ -62,16 +92,21 @@ function getNewsFeedMessageValue(e){
   }
 
 
+  const [fireImage,setFireImage]= useState(null)
+  function getInputFileChange(e){
+    if(e.target.files[0]){
+      setFireImage(e.target.files[0])
+    }
+  }
+
+
 
 
   return ( 
     
     <footer className="Footer">
 
-      
-      <button className="Footer__btn" data-testid="leftbutton" style={{display:state.FooterBtnDisplay}} onClick={()=>dispatch({type:Actions.FOOTER,payload:"leftBtn"})} > <CgProfile/>  </button>
-
-
+  
 
       {
       state.PageOnDisplay === "TeamChatScreen"?
@@ -101,7 +136,31 @@ function getNewsFeedMessageValue(e){
       (state.PageOnDisplay === "NewsFeed")?
       (
       <>
+
+      <input 
+      accept="image/*"
+      className="Footer__fileUploader"
+      id="file"
+      type="file"
+      onChange={getInputFileChange}
+        />
+
+      <label htmlFor="file"
+      className="Footer__sendMsg">
+        <FcImageFile/>
+      </label>
+
+
       <input
+      style={
+        messageSavedNewsFeed.length>=1?{
+          position:"absolute",
+          bottom:"11vh",
+          minWidth:"90vw",
+          wordWrap: "break-word"
+
+        }:{}
+      }
       className="Footer__inputbar"
       value={messageSavedNewsFeed}
        type="text" 

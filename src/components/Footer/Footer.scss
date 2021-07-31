@@ -8,14 +8,21 @@
   align-items: center;
   background-color: #fbbb7e;
   background-image: linear-gradient(286deg, #fbbb7e 0%, #f7d668 100%);
-
-
   border-top: 0.5vh solid #F0C265 ;
+
+  &__fileUploader{
+    
+    display: none;
+
+  }
+
   &__inputbar{
     min-width: 150px;
+    max-width: 150px;
     height: 44px;
     border-radius: 10px;
     font-size: 1.2rem;
+    overflow-y: scroll;
 
   }
   &__btn{
@@ -26,9 +33,7 @@
     background: none;
     border: none;
   }
-  &__logo{
-    height:60px ;
-  }
+  
   &__sendMsg{
     border: none;
     background-color: transparent;
