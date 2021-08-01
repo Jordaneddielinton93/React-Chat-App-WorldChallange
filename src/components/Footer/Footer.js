@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TiMessages,TiNews } from "react-icons/ti";
 import {FcImageFile} from "react-icons/fc"
 import { AiOutlineSend } from "react-icons/ai";
@@ -15,16 +15,14 @@ let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
 
 
 
-  
-
-
 
   function  HandleKeyDownNewsFeedArea(e){
 
-  
+    if(!fireImage)return console.log("need to upload image to send message")
+    
 
     if((e.key === "Enter" && messageSavedNewsFeed.length >=1 && fireImage !== null) || (e ==="clicked" && messageSavedNewsFeed.length >=1 && fireImage !== null ) ){
-
+      console.log(fireImage.name)
       const uploadTask = fireStorage.ref(`NewsFeed/${fireImage.name}`).put(fireImage);
       uploadTask.on(
         "state_changed",
@@ -45,6 +43,11 @@ let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
     if((e.key === "Enter" && messageSavedNewsFeed.length >=1) || (e ==="clicked" && messageSavedNewsFeed.length >=1 ) ){
     console.log("has been sent",e)
 
+    if(fireImage.name===null){
+      setFireImage("123")
+      console.log()
+    }
+
     fireDbTeamChat.child("NewsFeed").push({
         name:state.name,
         message:messageSavedNewsFeed,
@@ -57,10 +60,6 @@ let [messageSavedNewsFeed,setMessageSavedNewsFeed]= useState("")
     }
     // above will send a new message to the database below will send an image
     // fireStorage
-    
-
-
-
 
 
   }
@@ -96,6 +95,7 @@ function getNewsFeedMessageValue(e){
   function getInputFileChange(e){
     if(e.target.files[0]){
       setFireImage(e.target.files[0])
+      console.log(e.target.files[0])
     }
   }
 

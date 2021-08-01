@@ -19,6 +19,9 @@ export let inistialState={
 
 }
 
+console.log(inistialState.gitInfo)
+
+
 export default function reducer(state,action){
   switch (action.type) {
     

@@ -15,7 +15,7 @@ function App() {
   let [state,dispatch] = useReducer(reducer,inistialState)
 
   
-
+console.log(state)
   return (
     <div className="App">
 

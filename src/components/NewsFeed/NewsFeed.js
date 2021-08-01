@@ -1,7 +1,7 @@
 import "./NewsFeed.scss"
 import Firebase from "../FireBase/FireBase"
 import website from "../images/challangeImg.jpg"
-import img1 from "../images/sampleIMG1.jpg"
+
 import { useEffect, useState } from "react"
 import { TiThumbsOk } from 'react-icons/ti';
 
@@ -15,13 +15,14 @@ const NewsFeed = ({state}) => {
  
 
 
-function AddALike(thisid,thisname,thismessage,img,likes){
+function AddALike(thisid,thisname,thismessage,img,likes,uploadimage){
 // this is just a function that updates the database with one like
   fireDbTeamChat.child("NewsFeed").child(thisid).set({
     likes:likes+1,
     name:thisname,
     message:thismessage,
-    profileImg:img
+    profileImg:img,
+    imagesent:uploadimage
   })
 }
 
@@ -37,7 +38,8 @@ function AddALike(thisid,thisname,thismessage,img,likes){
         let newObj=profile.NewsFeed[id]
           fullListOfProfiles.push({...newObj,iD:id})
       }
-      setObjArray(fullListOfProfiles)
+      setObjArray(fullListOfProfiles.reverse())
+      
    })
  },[fireDbTeamChat])
 
@@ -52,6 +54,7 @@ function AddALike(thisid,thisname,thismessage,img,likes){
   function changeChallengTrueFalse(){
     challengeOpen?setChallenge(false):setChallenge(true)
   }
+  let [showImage,setShowImage]=useState("inline")
   
   return ( 
     <div className="NewsFeed">
@@ -81,6 +84,12 @@ function AddALike(thisid,thisname,thismessage,img,likes){
 
       {objArray.map((item,index)=>{
 
+        // if(item.imagesent===undefined){
+        //   setShowImage("none")
+        //   item.imagesent="123"
+        //   console.log(imag)
+        // }
+        console.log(item.imagesent)
 
 
         return(
@@ -103,15 +112,8 @@ function AddALike(thisid,thisname,thismessage,img,likes){
 
                 <div className="NewsFeed__Post__MessageCont-msg-img">
 
-                  <img 
-                  onClick={()=>console.log("im image1")}
-                  className="NewsFeed__Post__MessageCont-msg-img-left" 
-                  src={"state.imgURL"}   alt="" />
-
-
-
-
-                  <img className="NewsFeed__Post__MessageCont-msg-img-left"
+                  <img style={{display:showImage}}
+                   className="NewsFeed__Post__MessageCont-msg-img-left"
                   src={`https://firebasestorage.googleapis.com/v0/b/chatappchallange.appspot.com/o/NewsFeed%2F${item.imagesent}?alt=media&token=389fed54-3698-4bad-aadf-8a1d1616dda2`}  alt="" />
 
                 </div>
@@ -126,7 +128,7 @@ function AddALike(thisid,thisname,thismessage,img,likes){
                 <div className="NewsFeed__Post__ResponseCont__likes">
                   <button 
                   className="NewsFeed__Post__ResponseCont__likes-btn"
-                  onClick={()=>AddALike(item.iD,item.name,item.message,item.profileImg,item.likes)}
+                  onClick={()=>AddALike(item.iD,item.name,item.message,item.profileImg,item.likes,item.imagesent)}
                   >
                     <TiThumbsOk/>like
                   </button>
