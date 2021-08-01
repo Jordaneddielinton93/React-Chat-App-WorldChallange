@@ -152,6 +152,7 @@ function getNewsFeedMessageValue(e){
 
 
       <input
+      placeholder="IMAGE & TEXT"
       style={
         messageSavedNewsFeed.length>=1?{
           position:"absolute",
