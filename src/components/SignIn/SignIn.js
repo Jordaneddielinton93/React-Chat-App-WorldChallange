@@ -78,8 +78,8 @@ const SignIn = ({state,dispatch}) => {
 
       <div className="SignInPage__Container">
         {toggleBorder !== "thick lime solid"?
-        <img className={imgClass} src={logo} alt="" />:
-        <img className={imgClass} src={state.avatar+".png"} alt="" />
+        <img className={imgClass} src={logo} alt="mainlogo" />:
+        <img className={imgClass} src={state.avatar+".png"} alt="github" />
         }
         
       </div>
